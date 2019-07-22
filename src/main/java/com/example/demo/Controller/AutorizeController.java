@@ -29,6 +29,7 @@ public class AutorizeController {
         System.out.println(userInfo.getBio());
         System.out.println(userInfo.getId());
         System.out.println(userInfo.getName());
+        System.out.println(111);
         return "index";
     }
 }

@@ -20,12 +20,15 @@ public class HelloController {
     @RequestMapping("/")
     public String getIndex(HttpServletRequest request){
         Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("token")){
-                User user = userMapper.selectUser(cookie.getValue());
-                request.getSession().setAttribute("user",user);
+        if (cookies!=null && cookies.length!=0){
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("token")){
+                    User user = userMapper.selectUser(cookie.getValue());
+                    request.getSession().setAttribute("user",user);
+                }
             }
         }
+
         return "index";
     }
 

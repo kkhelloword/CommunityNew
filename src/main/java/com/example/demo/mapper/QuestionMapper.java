@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 public interface QuestionMapper {
 
-    @Insert("insert into question (title,description,cmt_create,cmt_modified,tag) values (#{title},#{description},#{cmtCreate},#{cmtModified},#{tag})")
+    @Insert("insert into question (title,description,Gmt_create,Gmt_modified,tag) values (#{title},#{description},#{cmtCreate},#{cmtModified},#{tag})")
      void insertQuestion(Question question);
 }

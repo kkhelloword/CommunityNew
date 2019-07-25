@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -47,13 +48,14 @@ public class AutorizeController {
         githubAccess.setState(state);
         String token = githubProvide.getToken(githubAccess);
         GithubGetUserInfo userInfo = githubProvide.getuserInfo(token);
-        if (userInfo!=null){
+        if (userInfo!=null && !userInfo.getId().equals("")){
             User user = new User();
             user.setName(userInfo.getName());
             user.setToken(UUID.randomUUID().toString());
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
             user.setAccountId(String.valueOf(userInfo.getId()));
+            user.setAvatarUrl(userInfo.getAvatarUrl());
             System.out.println(user);
             userMapper.insertUser(user);
             response.addCookie(new Cookie("token",user.getToken()));
